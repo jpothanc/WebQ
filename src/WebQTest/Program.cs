@@ -27,7 +27,7 @@ var webQ = WebQ.WebQ.Create(x=>
 var data = await webQ.GetAsync(new WebQRequest()
 {
     Url = "posts?_limit=100",
-    NameTag = "example"
+    NameTag = "posts"
 
 });
 Console.WriteLine(data);
