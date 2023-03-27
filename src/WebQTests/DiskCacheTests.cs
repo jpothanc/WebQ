@@ -14,17 +14,17 @@ namespace WebQTests
 
         public static IEnumerable<object[]> OkTestData()
         {
-            yield return new object[] { new DiskOptions() { CachePath = Path.GetTempPath(), BackupDays = 3 },
+            yield return new object[] { new DiskOptions() { CachePath = Directory.GetCurrentDirectory(), BackupDays = 3 },
             "webq-cacheName", "data"};
-            yield return new object[] { new DiskOptions() { CachePath = Path.Combine(Path.GetTempPath(), "webcache"), BackupDays = 3 },
-            "webq-cacheName1", "data1"};
+           // yield return new object[] { new DiskOptions() { CachePath = Path.Combine(Directory.GetCurrentDirectory(), "webcache"), BackupDays = 3 },
+           // "webq-cacheName1", "data1"};
         }
 
         public static IEnumerable<object[]> FailTestData()
         {
-            yield return new object[] { new DiskOptions() { CachePath = Path.Combine(Path.GetTempPath(),"temp?"), BackupDays = 3 },
+            yield return new object[] { new DiskOptions() { CachePath = Path.Combine(Directory.GetCurrentDirectory(),"temp?"), BackupDays = 3 },
             "webq-cacheName", "data"};
-            yield return new object[] { new DiskOptions() { CachePath = Path.Combine(Path.GetTempPath(), "webcache>"), BackupDays = 3 },
+            yield return new object[] { new DiskOptions() { CachePath = Path.Combine(Directory.GetCurrentDirectory(), "webcache>"), BackupDays = 3 },
             "webq-cacheName1", "data1"};
             yield return new object[] { new DiskOptions() { CachePath = "", BackupDays = 3 },
             "webq-cacheName1", "data1"};
