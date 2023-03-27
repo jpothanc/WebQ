@@ -111,6 +111,7 @@ namespace WebQTests
         public void TestMethod_ReadFromInvalidDirectory_ThrowsIOExceptionException(DiskOptions options, string name, string data)
         {
             IDiskCache disk = new DiskCache(options);
+            Assert.True(!string.IsNullOrEmpty(data));
             var exception = Record.Exception(() => _ = disk.Read(name));
             Assert.True(exception is IOException);
             Assert.Contains("Cannot read data from", exception.Message);
