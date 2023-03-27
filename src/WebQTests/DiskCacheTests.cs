@@ -22,12 +22,19 @@ namespace WebQTests
 
         public static IEnumerable<object[]> FailTestData()
         {
-            yield return new object[] { new DiskOptions() { CachePath = Path.Combine(Directory.GetCurrentDirectory(),"temp?"), BackupDays = 3 },
+            yield return new object[] { new DiskOptions() { CachePath = Path.Combine(Directory.GetCurrentDirectory(),GetInvalidfileName("temp1")), BackupDays = 3 },
             "webq-cacheName", "data"};
-            yield return new object[] { new DiskOptions() { CachePath = Path.Combine(Directory.GetCurrentDirectory(), "webcache>"), BackupDays = 3 },
+            yield return new object[] { new DiskOptions() { CachePath = Path.Combine(Directory.GetCurrentDirectory(), GetInvalidfileName("webcache")), BackupDays = 3 },
             "webq-cacheName1", "data1"};
             yield return new object[] { new DiskOptions() { CachePath = "", BackupDays = 3 },
             "webq-cacheName1", "data1"};
+        }
+
+        public static string GetInvalidfileName(string name)
+        {
+            if (Environment.OSVersion.Platform == PlatformID.Unix)
+                return $"{name}/";
+            return $"{name}>";
         }
 
         [Theory]
