@@ -14,17 +14,17 @@ namespace WebQTests
 
         public static IEnumerable<object[]> OkTestData()
         {
-            yield return new object[] { new DiskOptions() { CachePath = "C:\\temp", BackupDays = 3 },
+            yield return new object[] { new DiskOptions() { CachePath = Path.Combine("C:","temp"), BackupDays = 3 },
             "webq-cacheName", "data"};
-            yield return new object[] { new DiskOptions() { CachePath = "C:\\temp\\webcache", BackupDays = 3 },
+            yield return new object[] { new DiskOptions() { CachePath = Path.Combine("C:","temp", "webcache"), BackupDays = 3 },
             "webq-cacheName1", "data1"};
         }
 
         public static IEnumerable<object[]> FailTestData()
         {
-            yield return new object[] { new DiskOptions() { CachePath = "C:\\temp?", BackupDays = 3 },
+            yield return new object[] { new DiskOptions() { CachePath = Path.Combine("C:","temp?"), BackupDays = 3 },
             "webq-cacheName", "data"};
-            yield return new object[] { new DiskOptions() { CachePath = "C:\\temp>\\webcache", BackupDays = 3 },
+            yield return new object[] { new DiskOptions() { CachePath = Path.Combine("C:","temp", "webcache>"), BackupDays = 3 },
             "webq-cacheName1", "data1"};
             yield return new object[] { new DiskOptions() { CachePath = "", BackupDays = 3 },
             "webq-cacheName1", "data1"};
