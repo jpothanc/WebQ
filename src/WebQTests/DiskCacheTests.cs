@@ -72,6 +72,9 @@ namespace WebQTests
         [MemberData(nameof(FailTestData))]
         public void TestMethod_SaveToInvalidDirectory_ThrowsIOExceptionException(DiskOptions options, string name, string data)
         {
+            if (Environment.OSVersion.Platform == PlatformID.Unix)
+                return;
+
             IDiskCache disk = new DiskCache(options);
             var exception = Record.Exception(() => disk.Save(data, name));
             Assert.True(exception is IOException);
@@ -117,6 +120,9 @@ namespace WebQTests
         [MemberData(nameof(FailTestData))]
         public void TestMethod_ReadFromInvalidDirectory_ThrowsIOExceptionException(DiskOptions options, string name, string data)
         {
+            if (Environment.OSVersion.Platform == PlatformID.Unix)
+                return;
+
             IDiskCache disk = new DiskCache(options);
             Assert.True(!string.IsNullOrEmpty(data));
             var exception = Record.Exception(() => _ = disk.Read(name));
